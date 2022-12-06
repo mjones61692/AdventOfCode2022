@@ -2252,14 +2252,23 @@ var input = `15560
 
 function findElfCarryingMost(input) {
   const food = input.split('\n');
-  var mostCalories = 0;
+  var mostCalories1 = 0;
+  var mostCalories2 = 0;
+  var mostCalories3 = 0;
   var currentCalories = 0;
 
   for (var x = 0; x < food.length; x++) {
     var item = food[x];
     if (item == '') {
-      if (currentCalories > mostCalories) {
-        mostCalories = currentCalories;
+      if (currentCalories > mostCalories1) {
+        mostCalories3 = mostCalories2;
+        mostCalories2 = mostCalories1;
+        mostCalories1 = currentCalories;
+      } else if (currentCalories > mostCalories2){
+        mostCalories3 = mostCalories2;
+        mostCalories2 = currentCalories;
+      } else if (currentCalories > mostCalories3){
+        mostCalories3 = currentCalories;
       }
       currentCalories = 0;
     } else {
@@ -2267,7 +2276,7 @@ function findElfCarryingMost(input) {
     }
   }
 
-  return mostCalories;
+  return mostCalories1 + mostCalories2 + mostCalories3;
 }
 
 console.log(`Most calories is: ${findElfCarryingMost(input)}`);
