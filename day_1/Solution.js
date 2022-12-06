@@ -1,4 +1,4 @@
-15560
+var input = `15560
 3906
 7076
 11980
@@ -18,7 +18,7 @@
 
 3761
 5599
-13187
+13187ß
 12558
 7425
 9269
@@ -2248,4 +2248,26 @@
 3935
 3430
 5920
-3460
+3460`;
+
+function findElfCarryingMost(input) {
+  const food = input.split('\n');
+  var mostCalories = 0;
+  var currentCalories = 0;
+
+  for (var x = 0; x < food.length; x++) {
+    var item = food[x];
+    if (item == '') {
+      if (currentCalories > mostCalories) {
+        mostCalories = currentCalories;
+      }
+      currentCalories = 0;
+    } else {
+      currentCalories += parseInt(item);
+    }
+  }
+
+  return mostCalories;
+}
+
+console.log(`Most calories is: ${findElfCarryingMost(input)}`);
